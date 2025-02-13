@@ -1,7 +1,13 @@
+package com.example.service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+import com.example.dominio.*;
+import com.example.util.ConverterData;
+
 
 public class Biblioteca {
     private List<Livro> livros;
@@ -31,7 +37,34 @@ public class Biblioteca {
         System.out.println("Livro cadastrado com sucesso!");
     }
 
-    // Listar todos os livros
+
+    // Cadastrar usuário
+    public void cadastrarUsuario() {
+        System.out.print("Digite o nome do usuário: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o CPF do usuário: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Digite o e-mail do usuário: ");
+        String email = scanner.nextLine();
+        String preferenciaNotificacao;
+
+        while(true) {
+            System.out.println("\nEscolha como deseja receber as suas notificações");
+            System.out.println("1 - SMS");
+            System.out.println("2 - E-mail");
+            System.out.print("Opção: ");
+            preferenciaNotificacao = scanner.nextLine().trim();
+            if (email.isEmpty()){
+                System.out.println("A preferência de notificações é obrigatório!");
+                continue;
+            }
+            break;
+        }
+
+        List<Usuario> usuarios = new ArrayList<>();
+                usuarios.add(new Usuario(nome, cpf, email, preferenciaNotificacao));
+    }
+
     public void listarLivros() {
         if (livros.isEmpty()) {
             System.out.println("Nenhum livro cadastrado.");
@@ -80,8 +113,11 @@ public class Biblioteca {
             String cpfUsuario = scanner.nextLine();
             System.out.print("Digite o e-mail do usuário: ");
             String emailUsuario = scanner.nextLine();
+            System.out.print("Digite a preferência de notificação do usuário: ");
+            String preferenciaNotificacao = scanner.nextLine();
 
-            Usuario usuario = new Usuario(nomeUsuario, cpfUsuario, emailUsuario);
+            //preferenciaNotificacao;
+            Usuario usuario = new Usuario(nomeUsuario, cpfUsuario, emailUsuario, preferenciaNotificacao);
             System.out.print("Digite a data de devolução (formato: dd/MM/yyyy): ");
             String dataDevolucaoStr = scanner.nextLine();
             Date dataEmprestimo = new Date();
@@ -121,41 +157,46 @@ public class Biblioteca {
         return null;
     }
 
+    
     // Menu de opções
     public void exibirMenu() {
         while (true) {
             System.out.println("\n--- MENU ---");
             System.out.println("1. Cadastrar livro");
-            System.out.println("2. Listar todos os livros");
-            System.out.println("3. Listar livros emprestados");
-            System.out.println("4. Listar histórico de empréstimos");
-            System.out.println("5. Emprestar livro");
-            System.out.println("6. Devolver livro");
-            System.out.println("7. Sair");
+            System.out.println("2. Cadastrar usuário");
+            System.out.println("3. Listar todos os livros");
+            System.out.println("4. Listar livros emprestados");
+            System.out.println("5. Listar histórico de empréstimos");
+            System.out.println("6. Emprestar livro");
+            System.out.println("7. Devolver livro");
+            System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine();  // Limpar o buffer
+            scanner.nextLine();  
 
             switch (opcao) {
                 case 1:
                     cadastrarLivro();
                     break;
                 case 2:
-                    listarLivros();
+                    cadastrarUsuario();
                     break;
                 case 3:
-                    listarLivrosEmprestados();
+                    listarLivros();
                     break;
                 case 4:
-                    listarHistoricoEmprestimos();
+                    listarLivrosEmprestados();
                     break;
                 case 5:
-                    emprestarLivro();
+                    listarHistoricoEmprestimos();
                     break;
                 case 6:
-                    devolverLivro();
+                    emprestarLivro();
                     break;
                 case 7:
+                    devolverLivro();
+                    break;
+                case 0:
                     System.out.println("Saindo...");
                     return;
                 default:

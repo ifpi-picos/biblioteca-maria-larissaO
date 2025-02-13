@@ -1,12 +1,19 @@
+package com.example.dominio;
+
 public class Usuario {
     private String nome;
     private String cpf;
     private String email;
+    private String preferenciaNotificacao;
+   
+    
 
-    public Usuario(String nome, String cpf, String email) {
+    public Usuario(String nome, String cpf, String email, String preferenciaNotificacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.preferenciaNotificacao = preferenciaNotificacao;
+       
     }
 
     public String getNome() {
@@ -33,9 +40,18 @@ public class Usuario {
         this.email = email; 
     }
 
+    public String getPreferenciaNotificacao() {
+        return preferenciaNotificacao;
+    }
+
+    public void setPreferenciaNotificacao(String preferenciaNotificacao) {
+        this.preferenciaNotificacao = preferenciaNotificacao;
+    }
+
+
     @Override
     public String toString() {
-        return "Nome: " + nome + ", CPF: " + cpf + ", Email: " + email;
+        return "Nome: " + nome + ", CPF: " + cpf + ", Email: " + email + ", Preferência de Notificação: " + preferenciaNotificacao;
     }
 }
 

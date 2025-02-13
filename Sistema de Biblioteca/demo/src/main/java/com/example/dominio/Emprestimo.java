@@ -1,3 +1,4 @@
+package com.example.dominio;
 import java.util.Date;
 
 public class Emprestimo {

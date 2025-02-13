@@ -1,9 +1,15 @@
+package com.example.dominio;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Livro {
     private String autor;
     private String titulo;
     private String editora;
     private int ano;
     private boolean emprestado;
+    private List<Usuario> listaReservas; 
 
     public Livro(String autor, String titulo, String editora, int ano) {
         this.autor = autor;
@@ -11,6 +17,7 @@ public class Livro {
         this.editora = editora;
         this.ano = ano;
         this.emprestado = false;
+        this.listaReservas = new ArrayList<>();
     }
 
     public String getAutor() {
@@ -53,9 +60,20 @@ public class Livro {
         this.emprestado = emprestado;
     }
 
+    public void reservarLivro(Usuario usuario){
+        listaReservas.add(usuario);
+    }
+
+    public List<Usuario> getReservas(){
+        return listaReservas;
+    }
+
+    public void limparReservas(){
+        listaReservas.clear();
+    }
+
     @Override
     public String toString() {
         return "Título: " + titulo + ", Autor: " + autor + ", Ano: " + ano + ", Editora: " + editora + ", Emprestado: " + (emprestado ? "Sim" : "Não");
     }
 }
-
